@@ -1,0 +1,8 @@
+.tabs {
+    @include grid(3, 2rem);
+    button {
+        border: none;
+        padding: 0.2rem;
+        font-weight: $bold;
+    }
+}
