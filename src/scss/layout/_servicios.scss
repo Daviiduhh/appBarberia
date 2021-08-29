@@ -8,15 +8,16 @@
         background-color: $blanco;
         padding-left: 2rem;
         border-radius: 1.5rem;
-        
-        &:hover {
-            background-color: $azul;
-            color: $blanco;
-
-            .precio-servicio {
-                color: $negro;
-            }
+    }
+    
+    .seleccionado {
+        background-color: $azul;
+        color: $blanco;
+    
+        .precio-servicio {
+            color: $negro;
         }
+
     }
 }
 
