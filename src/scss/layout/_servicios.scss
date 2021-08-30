@@ -1,4 +1,6 @@
 .listado-servicios {
+    margin-bottom: 2rem;
+
     @include grid(1, 2rem);
     @include tablet {
         @include grid(2, 2rem);

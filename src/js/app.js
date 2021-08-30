@@ -1,6 +1,37 @@
+let pagina = 1;
+
 document.addEventListener('DOMContentLoaded', () => {
     iniciarApp();
+
+    //Resalta el DIv actual segun el tab/pestaña que se presiona
+    mostrarSeccion();
+
+    //Oculata o muestra la seccion segun el tab que se presiona
+    cambiarSeccion();    
 });
+
+function mostrarSeccion() {
+    const seccionActual = document.querySelector(`#paso-${pagina}`);
+    seccionActual.classList.add('mostrar-seccion')
+}
+
+function cambiarSeccion() {
+    const enlaces = document.querySelectorAll('.tabs button');
+
+    enlaces.forEach (enlace => {
+        enlace.addEventListener('click', event => {
+            event.preventDefault();
+
+            pagina = parseInt(event.target.dataset.paso);
+            
+            //Eliminar seccion anterior
+            document.querySelector('.mostrar-seccion').classList.remove('mostrar-seccion');
+
+            const seccion = document.querySelector(`#paso-${pagina}`)
+            seccion.classList.add('mostrar-seccion');
+        })
+    })
+}
 
 function iniciarApp() {
     mostrarServicios();
