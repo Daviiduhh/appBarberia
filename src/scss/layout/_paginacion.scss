@@ -1,0 +1,23 @@
+.paginacion {
+    @include grid(2, 2rem);
+    margin-bottom: 2rem;
+    button {
+        border: none;
+        padding: 0.5rem;
+        font-size: 1.4rem;
+        font-weight: $bold;
+        text-transform: uppercase;
+        text-align: center;
+        border-radius: 1rem;
+        color: $negro;
+        background-color: $azul;
+
+        &.ocultar {
+            visibility: hidden;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

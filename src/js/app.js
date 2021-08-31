@@ -8,6 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Oculata o muestra la seccion segun el tab que se presiona
   cambiarSeccion();
+
+  //Paginacion siguiente y anterior
+  paginaSiguiente();
+  paginaAnterior();
+
+  //Comprueba la pagina actual para ocultar/mostrar la paginacion
+  botonesPaginador();
 });
 
 function mostrarSeccion() {
@@ -110,5 +117,34 @@ function seleccionarServicio(event) {
     elemento.classList.remove("seleccionado");
   } else {
     elemento.classList.add("seleccionado");
+  }
+}
+
+function paginaSiguiente () {
+  const paginaSiguiente = document.querySelector('#siguiente');
+  paginaSiguiente.addEventListener('click', () => {
+    pagina++;
+    botonesPaginador();
+    console.log(pagina)
+  });
+}
+function paginaAnterior () {
+  const paginaAnterior = document.querySelector('#anterior');
+  paginaAnterior.addEventListener('click', () => {
+    pagina--;
+    botonesPaginador();
+    console.log(pagina)
+  });
+}
+
+function botonesPaginador() {
+  const paginaSiguiente = document.querySelector('#siguiente');
+  const paginaAnterior = document.querySelector('#anterior');
+  if(pagina === 1) {
+    paginaAnterior.classList.add('ocultar');
+  } else if(pagina === 2) {
+    document.querySelector('.ocultar').classList.remove('ocultar');
+  } else if (pagina === 3) {
+    paginaSiguiente.classList.add('ocultar');
   }
 }
