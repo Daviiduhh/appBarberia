@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Muestra el resumen de la cita, o el mensaje de que está vacia o oncompleta
   mostrarResumen();
+
+  //Almacena el nombre de la cita en el objeto
+  nombreCita();
 });
 
 function mostrarSeccion() {
@@ -124,9 +127,32 @@ function seleccionarServicio(event) {
 
   if (elemento.classList.contains("seleccionado")) {
     elemento.classList.remove("seleccionado");
+
+    const id = parseInt(elemento.dataset.idServicio);
+
+    eliminarServicio(id);
   } else {
     elemento.classList.add("seleccionado");
+
+    const servicioObj = {
+      id: parseInt(elemento.dataset.idServicio),
+      nombre: elemento.firstElementChild.textContent,
+      precio: elemento.lastElementChild.textContent
+    }
+
+    agregarServicio(servicioObj);
   }
+}
+
+function eliminarServicio(id) {
+  const { servicios } = cita;
+  cita.servicios = servicios.filter( servicio => servicio.id !== id );
+  console.log(cita);
+}
+function agregarServicio(servicioObj) {
+  const { servicios } = cita;
+  cita.servicios = [...servicios, servicioObj];
+  console.log(cita);
 }
 
 function paginaSiguiente() {
@@ -178,4 +204,50 @@ function mostrarResumen() {
     //Agregar a resumenDiv
     resumenDiv.appendChild(noServicios);
   }
+}
+
+function nombreCita() {
+  const nombreInput = document.querySelector('#nombre');
+
+  nombreInput.addEventListener('input', evento => {
+    const nombreTexto = evento.target.value.trim(); //Trim elimina espacios en blanco
+    
+    //validacion para que nombre no esté vacio
+    if(nombreTexto === '' || nombreTexto.length<2){
+      mostrarAlerta('error','Nombre no valido');
+    } else {
+      const alerta = document.querySelector('.alerta');
+
+      if(alerta) {
+        alerta.remove();
+      }
+
+      cita.nombre = nombreTexto;
+    }
+  });
+}
+
+function mostrarAlerta(tipo, mensaje) {
+  //Si hay alerta previa no mostrar otra
+  const alertaPrevia = document.querySelector('.alerta');
+
+  if(alertaPrevia) {
+    alertaPrevia.remove(); //Tambien puede ser return;
+  }
+  const alerta = document.createElement('div');
+    alerta.textContent = `${tipo}: ${mensaje}`;
+    alerta.classList.add('alerta');
+    
+    if(tipo === 'error'){
+      alerta.classList.add('error');
+    } 
+
+    //Insertar en el formulario
+    const formulario = document.querySelector('.formulario');
+    formulario.appendChild(alerta);
+
+    //Eliminar la alerta depues de 3 segundos
+    setTimeout(() => {
+      alerta.remove();
+    }, 3000);
 }
