@@ -26,9 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
   //Muestra el resumen de la cita, o el mensaje de que está vacia o oncompleta
   mostrarResumen();
 
-  //Almacena el nombre, fehcha y hora de la cita en el objeto
+  //Almacena el nombre, fecha y hora de la cita en el objeto
   nombreCita();
   fechaCita();
+  horaCita();
+
+  //Deshabilitar fechas anteriores
+  deshabilitarFechaAnterior();
 });
 
 function mostrarSeccion() {
@@ -148,12 +152,10 @@ function seleccionarServicio(event) {
 function eliminarServicio(id) {
   const { servicios } = cita;
   cita.servicios = servicios.filter( servicio => servicio.id !== id );
-  console.log(cita);
 }
 function agregarServicio(servicioObj) {
   const { servicios } = cita;
   cita.servicios = [...servicios, servicioObj];
-  console.log(cita);
 }
 
 function paginaSiguiente() {
@@ -161,7 +163,6 @@ function paginaSiguiente() {
   paginaSiguiente.addEventListener("click", () => {
     pagina++;
     botonesPaginador();
-    console.log(pagina);
   });
 }
 function paginaAnterior() {
@@ -169,7 +170,6 @@ function paginaAnterior() {
   paginaAnterior.addEventListener("click", () => {
     pagina--;
     botonesPaginador();
-    console.log(pagina);
   });
 }
 
@@ -181,6 +181,8 @@ function botonesPaginador() {
   } else if (pagina === 3) {
     paginaSiguiente.classList.add("ocultar");
     paginaAnterior.classList.remove("ocultar");
+
+    mostrarResumen(); //Cuando nos metemos a pagina 3
   } else {
     document.querySelector(".ocultar").classList.remove("ocultar");
   }
@@ -204,6 +206,8 @@ function mostrarResumen() {
 
     //Agregar a resumenDiv
     resumenDiv.appendChild(noServicios);
+  } else {
+    console.log('Cita valida')
   }
 }
 
@@ -242,7 +246,20 @@ function fechaCita() {
       console.log(cita);
     }
   });
+}
 
+function horaCita() {
+  const horaInput = document.querySelector('#hora');
+    horaInput.addEventListener('input', e => {
+        const horaCita = e.target.value;
+        const hora = horaCita.split(':')
+
+        if(hora[0] < 10 || hora[0] > 20 ) {
+            mostrarAlerta('error','Hora no válida');
+        } else {
+            cita.hora = horaCita;
+        }
+    })
 }
 
 function mostrarAlerta(tipo, mensaje) {
@@ -268,4 +285,19 @@ function mostrarAlerta(tipo, mensaje) {
     setTimeout(() => {
       alerta.remove();
     }, 3000);
+}
+
+function deshabilitarFechaAnterior() {
+  const inputFecha = document.querySelector('#fecha');
+
+  const fechaAhora = new Date();
+  const year = fechaAhora.getFullYear();
+  const mes = fechaAhora.getMonth() + 1;
+  fechaAhora.setDate(fechaAhora.getDate() + 1);
+  const dia = fechaAhora.getDate() + 1;
+  
+  //Formato deseado aaaa-mm-dd
+  const deshabilitarFecha = `${year}-${mes}-${dia}`;
+
+  inputFecha.min = deshabilitarFecha;
 }
