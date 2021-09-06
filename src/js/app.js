@@ -26,8 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
   //Muestra el resumen de la cita, o el mensaje de que está vacia o oncompleta
   mostrarResumen();
 
-  //Almacena el nombre de la cita en el objeto
+  //Almacena el nombre, fehcha y hora de la cita en el objeto
   nombreCita();
+  fechaCita();
 });
 
 function mostrarSeccion() {
@@ -225,6 +226,23 @@ function nombreCita() {
       cita.nombre = nombreTexto;
     }
   });
+}
+
+function fechaCita() {
+  const fechaCita = document.querySelector('#fecha');
+  fechaCita.addEventListener('input', evento => {
+    const dia = new Date(evento.target.value).getUTCDay(); //Domingo === 0
+
+    if(dia === 1){
+      evento.preventDefault();
+      fechaCita.value = '';
+      mostrarAlerta('error', 'Los lunes no se labora');
+    } else {
+      cita.fecha = fechaCita.value;
+      console.log(cita);
+    }
+  });
+
 }
 
 function mostrarAlerta(tipo, mensaje) {
