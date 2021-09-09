@@ -37,4 +37,13 @@
             color: $azul;
         }
     }
+
+    .total-pagar {
+        p {
+            font-weight: $bold;
+            span {
+                color: $azul;
+            }
+        }
+    }
 }
