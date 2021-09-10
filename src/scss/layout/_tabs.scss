@@ -1,20 +1,25 @@
 .tabs {
+    width: 100%;
+    padding: 1.5rem;
     @include grid(3, 2rem);
+    gap: 0;
     button {
+        background-color: $verde;
+        width: 100%;
         border: none;
-        padding: 0.5rem;
+        padding: 1rem;
         font-size: 1.4rem;
         font-weight: $bold;
         text-transform: uppercase;
         text-align: center;
-        border-radius: 1rem;
-
+        color: $negro;
+        
         &:hover{
             cursor: pointer;
         }
     }
     .resaltar-boton {
-        background-color: $azul;
-        color: $negro;
+        border-bottom: solid 3px $verde;
+        background-color: $verdeA;
     }
 }

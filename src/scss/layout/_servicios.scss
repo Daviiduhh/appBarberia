@@ -9,23 +9,19 @@
     .servicio {
         background-color: $blanco;
         padding-left: 2rem;
-        border-radius: 1.5rem;
+        border-radius: 0.3rem;
     }
     
     .seleccionado {
-        background-color: $azul;
+        background-color: $verde;
         color: $negro;
-    
-        .precio-servicio {
-            color: $negro;
-        }
     }
 }
 
 .precio-servicio {
     font-weight: $bold;
     font-size: 2.2rem;
-    color: $azul;
+    color: $negro;
 }
 .nombre-servicio {
     color: $negro;

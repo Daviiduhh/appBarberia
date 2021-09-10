@@ -1,37 +1,37 @@
 .formulario {
-    width: 100%;
-    margin-bottom: 2rem;
-    .campo{
-        display: flex;
-        align-items: center;
-        margin: 1.5rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  @include grid(2rem, 1);
+  .campo {
+    label,
+    input,
+    .alerta {
+      padding: 0.5rem 0 0.5rem 1rem;
+    }
+    label {
+      margin-bottom: 0.5rem;
+      color: $blanco;
+      font-weight: $bold;
+    }
+    input {
+      border: none;
+      border-radius: 0.3rem;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+  }
 
-        label, input, .alerta {
-        padding: 0.5rem 0 0.5rem 1rem;
-        }
-        label{
-            flex: 0 0 10rem;
-            color: $blanco;
-            font-weight: $bold;
-        }
-        input{
-            flex: 5;
-            border: none;
-            border-radius: 1rem;
-        }
+  .alerta {
+    color: $blanco;
+    padding: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: $bold;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 1rem;
+    margin: 2rem 0;
+    &.error {
+      background-color: rgb(194, 0, 0);
     }
-    
-    .alerta{
-        color: $blanco;
-        padding: 0.5rem;
-        font-size: 1.4rem;
-        font-weight: $bold;
-        text-transform: uppercase;
-        text-align: center;
-        border-radius: 1rem;
-        margin: 2rem 0;
-        &.error {
-            background-color: rgb(194, 0, 0);
-        }
-    }
+  }
 }
